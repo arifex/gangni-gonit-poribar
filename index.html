@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gangni Gonit Poribar · গাংনী গণিত পরিবার</title>
+<meta name="description" content="A community math club in Gangni, Meherpur, teaching mathematics, statistics and programming to school students since 2012.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;700;800&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #FBFCFE;
+    --grid: #DCE5F3;
+    --ink: #1C2B5A;
+    --ink-soft: #3A4A7A;
+    --text: #18202F;
+    --muted: #5B6475;
+    --margin: #D6453D;
+    --mark: #F5C542;
+    --card: #FFFFFF;
+    --line: #D5DCE8;
+    --display: "Baloo Da 2", "Hind Siliguri", system-ui, sans-serif;
+    --body: "Hind Siliguri", "Baloo Da 2", system-ui, -apple-system, "Segoe UI", sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper: #141A2B; --grid: #1F2840; --ink: #A9BCF5; --ink-soft: #C3D0F7;
+      --text: #E7EBF5; --muted: #A3ABC0; --margin: #F07167; --mark: #F5C542;
+      --card: #1A2236; --line: #2B3554;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #141A2B; --grid: #1F2840; --ink: #A9BCF5; --ink-soft: #C3D0F7;
+    --text: #E7EBF5; --muted: #A3ABC0; --margin: #F07167; --mark: #F5C542;
+    --card: #1A2236; --line: #2B3554;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  /* exercise-book margin line */
+  body::after {
+    content: ""; position: fixed; top: 0; bottom: 0; left: clamp(18px, 6vw, 72px);
+    width: 2px; background: var(--margin); opacity: .55; pointer-events: none;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: var(--ink); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--mark); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 clamp(36px, 9vw, 112px) 0 clamp(36px, 9vw, 112px); }
+
+  /* header */
+  header.top { padding: 22px 0; }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
+  .logo { width: 52px; height: 52px; border-radius: 50%; object-fit: contain; background: #fff; padding: 2px; border: 1px solid var(--line); }
+  .brand .logo-fallback { width: 48px; height: 48px; border-radius: 50%; display: none; place-items: center; background: var(--ink); color: var(--paper); font-family: var(--display); font-weight: 800; font-size: 1.5rem; }
+  .brand strong { font-family: var(--display); font-weight: 700; font-size: 1.1rem; line-height: 1.1; display: block; }
+  .brand span { font-size: .9rem; color: var(--muted); }
+  nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; flex-wrap: wrap; }
+  nav a { text-decoration: none; color: var(--ink-soft); font-weight: 500; }
+  nav a:hover { color: var(--margin); }
+
+  /* hero */
+  .hero { padding: clamp(48px, 9vw, 110px) 0 clamp(56px, 8vw, 96px); }
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(24px, 5vw, 64px); align-items: center; }
+  .hero-logo { width: clamp(200px, 26vw, 300px); aspect-ratio: 1; border-radius: 50%; background: #fff; object-fit: contain; padding: 10px; border: 1px solid var(--line); box-shadow: 0 0 0 10px var(--paper); }
+  @media (max-width: 760px) { .hero { grid-template-columns: 1fr; } .hero-logo { order: -1; width: 180px; } }
+  .hero .bn {
+    font-family: var(--display); font-weight: 800; color: var(--ink);
+    font-size: clamp(2.6rem, 8vw, 5.4rem); line-height: 1.05; margin: 0;
+  }
+  .hero .en { font-family: var(--display); font-weight: 600; line-height: 1.3; font-size: clamp(1.3rem, 3vw, 1.9rem); color: var(--ink-soft); margin: 8px 0 0; }
+  .hero p.lead { max-width: 58ch; font-size: 1.2rem; margin: 28px 0 0; color: var(--text); }
+  .equation {
+    font-family: var(--display); font-weight: 500; color: var(--margin);
+    font-size: clamp(1.1rem, 2.4vw, 1.5rem); margin: 30px 0 0; transform: rotate(-1.5deg); display: inline-block;
+  }
+  .equation mark { background: linear-gradient(transparent 55%, var(--mark) 55%); color: inherit; padding: 0 4px; }
+  .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 36px; }
+  .btn {
+    display: inline-block; padding: 12px 22px; border-radius: 10px; font-weight: 600; text-decoration: none;
+    border: 2px solid var(--ink); transition: transform .15s ease;
+  }
+  .btn.primary { background: var(--ink); color: var(--paper); }
+  .btn.ghost { color: var(--ink); background: var(--card); }
+  .btn:hover { transform: translateY(-2px); }
+  @media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:hover { transform: none; } }
+
+  section { padding: clamp(48px, 7vw, 84px) 0; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--ink); margin: 0 0 18px; line-height: 1.15; }
+  h3 { font-family: var(--display); font-weight: 700; font-size: 1.3rem; margin: 0 0 6px; color: var(--text); }
+  .intro { max-width: 62ch; color: var(--text); margin: 0; }
+
+  /* subjects */
+  .subjects { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; margin-top: 34px; }
+  .subject { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  .subject .glyph { font-family: var(--display); font-weight: 800; font-size: 2rem; color: var(--margin); line-height: 1; margin-bottom: 12px; }
+  .subject p { margin: 0; color: var(--muted); font-size: 1rem; }
+
+  /* timeline: a real sequence */
+  .timeline { list-style: none; margin: 34px 0 0; padding: 0; border-left: 2px dashed var(--ink-soft); }
+  .timeline li { position: relative; padding: 0 0 30px 28px; }
+  .timeline li:last-child { padding-bottom: 0; }
+  .timeline li::before { content: ""; position: absolute; left: -8px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: var(--paper); border: 3px solid var(--margin); }
+  .timeline .year { font-family: var(--display); font-weight: 800; font-size: 1.6rem; color: var(--ink); line-height: 1.2; }
+  .timeline p { margin: 2px 0 0; max-width: 56ch; }
+
+  /* founders */
+  .founders { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; margin-top: 34px; }
+  .founder { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .avatar { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: var(--paper); font-family: var(--display); font-weight: 700; font-size: 1.4rem; }
+  .founder .role { color: var(--muted); margin: 0; font-size: .98rem; }
+  .founder a { font-weight: 600; margin-top: auto; }
+
+  /* join */
+  .join { background: var(--ink); color: var(--paper); border-radius: 18px; padding: clamp(28px, 5vw, 48px); }
+  .join h2 { color: var(--paper); }
+  .join p { max-width: 58ch; margin: 0 0 24px; }
+  .join .btn { border-color: var(--paper); background: var(--paper); color: var(--ink); }
+
+  footer { padding: 40px 0 56px; color: var(--muted); font-size: .95rem; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Gangni Gonit Poribar home">
+      <img class="logo" src="logo.png" alt="Gangni Gonit Poribar logo" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+      <span class="logo-fallback" aria-hidden="true">গ</span>
+      <span><strong>Gangni Gonit Poribar</strong><span>গাংনী গণিত পরিবার</span></span>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#learn">What we teach</a></li>
+        <li><a href="#story">Our story</a></li>
+        <li><a href="#founders">Founders</a></li>
+        <li><a href="#join">Join</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+      <h1 class="bn" id="hero-title">গাংনী গণিত পরিবার</h1>
+      <p class="en">Gangni Gonit Poribar, a community math club in Gangni, Meherpur</p>
+      <p class="lead">Since 2012, we have been helping school students in our rural community enjoy mathematics, think clearly, and solve problems with confidence.</p>
+      <p class="equation" aria-label="Curiosity plus practice equals confidence">curiosity + practice = <mark>confidence</mark></p>
+      <div class="actions">
+        <a class="btn primary" href="https://www.facebook.com/gangni.gonit.poribar/" target="_blank" rel="noopener">Follow us on Facebook</a>
+        <a class="btn ghost" href="#learn">See what we teach</a>
+      </div>
+      </div>
+      <img class="hero-logo" src="logo.png" alt="Gangni Gonit Poribar logo with colourful numbers 1 to 6 around the club name" onerror="this.remove()">
+    </section>
+
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title">A family built around mathematics</h2>
+      <p class="intro">“Gonit Poribar” means “math family”. Since 2012 the club has brought school students in Gangni together to learn mathematics beyond the classroom, and we still run regular classes for students in the area.</p>
+    </section>
+
+    <section id="learn" aria-labelledby="learn-title">
+      <h2 id="learn-title">What we teach</h2>
+      <p class="intro">Our classes go beyond the textbook. Students learn to reason, ask questions and enjoy hard problems.</p>
+      <div class="subjects">
+        <article class="subject">
+          <div class="glyph" aria-hidden="true">ℕ</div>
+          <h3>Number theory</h3>
+          <p>Primes, divisibility and patterns in numbers, the heart of math olympiad problems.</p>
+        </article>
+        <article class="subject">
+          <div class="glyph" aria-hidden="true">P(A)</div>
+          <h3>Probability</h3>
+          <p>Counting, chance and games, learned through puzzles and simple experiments.</p>
+        </article>
+        <article class="subject">
+          <div class="glyph" aria-hidden="true">x̄</div>
+          <h3>Statistics</h3>
+          <p>Reading data, averages and charts, so students can make sense of numbers around them.</p>
+        </article>
+        <article class="subject">
+          <div class="glyph" aria-hidden="true">{ }</div>
+          <h3>Programming</h3>
+          <p>First steps in coding and logical thinking, turning math ideas into working programs.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="story" aria-labelledby="story-title">
+      <h2 id="story-title">Our story</h2>
+      <ol class="timeline">
+        <li>
+          <div class="year">2012</div>
+          <p>Gangni Gonit Poribar is founded in Gangni, Meherpur, to give local school students a place to learn mathematics together.</p>
+        </li>
+        <li>
+          <div class="year">2013</div>
+          <p>The club is recognised as <strong>Best Math Club</strong> at the Bangladesh Mathematical Olympiad.</p>
+        </li>
+        <li>
+          <div class="year">Today</div>
+          <p>Classes continue, now covering number theory, probability, statistics and programming. New sessions are announced on our Facebook page.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="founders" aria-labelledby="founders-title">
+      <h2 id="founders-title">Founders</h2>
+      <p class="intro">Gangni Gonit Poribar was co-founded by three people who share a love of mathematics and teaching.</p>
+      <div class="founders">
+        <article class="founder">
+          <div class="avatar" aria-hidden="true">MA</div>
+          <div>
+            <h3>Md. Arifuzzaman</h3>
+            <p class="role">Co-founder. Assistant Professor of Computer Science and Engineering, Leading University, Sylhet.</p>
+          </div>
+          <a href="https://www.facebook.com/md.arifuzzaman.soukhin7063/" target="_blank" rel="noopener">Facebook profile</a>
+        </article>
+        <article class="founder">
+          <div class="avatar" aria-hidden="true">AB</div>
+          <div>
+            <h3>Abir Bindu</h3>
+            <p class="role">Co-founder.</p>
+          </div>
+          <a href="https://www.facebook.com/bindu.alternative" target="_blank" rel="noopener">Facebook profile</a>
+        </article>
+        <article class="founder">
+          <div class="avatar" aria-hidden="true">AA</div>
+          <div>
+            <h3>Md. Al Amin Ashik</h3>
+            <p class="role">Co-founder.</p>
+          </div>
+          <a href="https://www.facebook.com/alamin.ashik.92" target="_blank" rel="noopener">Facebook profile</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="join" aria-labelledby="join-title">
+      <div class="join">
+        <h2 id="join-title">Join a class</h2>
+        <p>Are you a school student in or near Gangni who enjoys numbers, or wants to get better at them? Class times and events are posted on our Facebook page. Send us a message there to join.</p>
+        <a class="btn" href="https://www.facebook.com/gangni.gonit.poribar/" target="_blank" rel="noopener">Message us on Facebook</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Gangni Gonit Poribar, Gangni, Meherpur, Bangladesh</span>
+    <a href="https://www.facebook.com/gangni.gonit.poribar/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
